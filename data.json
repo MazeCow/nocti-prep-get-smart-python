@@ -1,0 +1,30 @@
+{
+  "products": [
+    { "name": "Portable force field unit", "price": 199.99, "cost": 125.99 },
+    { "name": "Plastic lips", "price": 3.99, "cost": 0.99 },
+    { "name": "Inflatable head in a cloak", "price": 59.99, "cost": 25.59 },
+    { "name": "Shoe gas mask", "price": 149.99, "cost": 87.79 }
+  ],
+  "purchases": [
+    {
+      "customerName": "Barbara Feldon",
+      "itemsBought": [1, 0, 2, 0],
+      "shippingCost": 0
+    },
+    {
+      "customerName": "Edward Platt",
+      "itemsBought": [0, 5, 1, 3],
+      "shippingCost": 13.32
+    },
+    {
+      "customerName": "Bernie Kopell",
+      "itemsBought": [2, 3, 0, 2],
+      "shippingCost": 15.61
+    },
+    {
+      "customerName": "Robert Karvelas",
+      "itemsBought": [1, 1, 1, 1],
+      "shippingCost": 1.87
+    }
+  ]
+}
