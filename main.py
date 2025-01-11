@@ -1,16 +1,17 @@
 import json
 import os
 
-# Returns the parsed json from data.json.
+# Returns the data from data.json.
 def getData():
     DATA_PATH = "./data.json"
     with open(DATA_PATH, "r") as f:
+        # Reads the json from the file and coverts it to a python object.
         data = json.load(f)
         return data
 
-# Prints the record table headers.
+# Prints record table headers.
 def printRecordHeaders():
-    # Object to hold the values for the record headers.
+    # Object to hold the headers.
     headerObj = {
                 "itemName": "Item Purchased",
                 "itemPrice": "Selling Price",
@@ -22,11 +23,11 @@ def printRecordHeaders():
             }
     printRecordRow(headerObj)
 
-# Prints a row of purchase data.
+# Prints a single purchase data record as a formatted table row.
 def printRecordRow(itemObj):
     print(f"| {str(itemObj["itemName"]).ljust(28)} | {str(itemObj["itemPrice"]).ljust(14)} | {str(itemObj["itemCost"]).ljust(10)} | {str(itemObj["profitPerUnit"]).ljust(16)} | {str(itemObj["quantity"]).ljust(9)} | {str(itemObj["totalItemProfit"]).ljust(18)} | {str(itemObj["totalItemPrice"]).ljust(17)} |")
     
-# Prints a blank line to seperate record data.
+# Prints a table length line of dashes. Used to separate/format record table data.
 def printRecordLine():
     print("".ljust(134, "-"))
 
@@ -35,17 +36,17 @@ def main():
     os.system("cls")
     data = getData()
     
-    # Variables for easier access to the data object.
+    # Unpacking variables for easy access to the data object.
     products = data["products"]
     purchases = data["purchases"]
     
-    # Define counter total variables.
+    # Define total variables.
     totalItemsSold: int = 0
     totalProfitProcessed: float = 0
     
     # Loop through all customer purchases.
     for customerPurchase in purchases:
-        # Variables for easier access to the customerPurchase object.
+        # Unpacking variables for easier access to the customerPurchase object.
         customerName: str = customerPurchase["customerName"]
         itemsBought: str = customerPurchase["itemsBought"]
         shippingCost: float = float(customerPurchase["shippingCost"])
@@ -68,18 +69,20 @@ def main():
             if not qty:
                 continue
             
-            # Variable for easier access to the item object.
+            # Unpacked variable for easier access to the item object.
             item = products[itemIndex]
+
+            # Unpack, format, and calculate other needed values.
             itemName = item["name"]
             itemPrice = round(float(item["price"]), 2)
             itemCost = round(float(item["cost"]), 2)
             profitPerUnit = round(itemPrice - itemCost, 2)
             totalItemProfit = round((itemPrice - itemCost) * qty, 2)
-            # Add to the total profit processed variable.
-            totalProfitProcessed += totalItemProfit
             totalItemPrice = round(itemPrice * qty,2)
-            # Add total item price to subtotal.
+
+            # Add necessary values to the totals.
             subtotal += totalItemPrice
+            totalProfitProcessed += totalItemProfit
             
             # Object to hold item data.
             itemObj = {
